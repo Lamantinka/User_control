@@ -41,4 +41,34 @@ public class RestController {
 	public Integer deletePersonById(@PathVariable Integer id) {
 		return service.deletePersonById(id);
 	}
+
+	@GetMapping("/getNameById/{id}")
+	public String getNameById(@PathVariable("id") Integer id) {
+		return service.getNameById(id);
+	}
+
+	@GetMapping("/getSurnameById/{id}")
+	public String getSurnameById(@PathVariable("id") Integer id) {
+		return service.getSurnameById(id);
+	}
+
+	@GetMapping("/getEmailById/{id}")
+	public String getEmailById(@PathVariable("id") Integer id) {
+		return service.getEmailById(id);
+	}
+
+	@GetMapping("/getLoginById/{id}")
+	public String getLoginById(@PathVariable("id") Integer id) {
+		return service.getLoginById(id);
+	}
+
+	@GetMapping("/getPasswordById/{id}")
+	public String getPasswordById(@PathVariable("id") Integer id) {
+		return service.getPasswordById(id);
+	}
+
+	@GetMapping("/getAgeById/{id}")
+	public String getAgeById(@PathVariable("id") Integer id) {
+		return service.getAgeById(id);
+	}
 }

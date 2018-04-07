@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "person")
@@ -14,24 +15,24 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID")
 	private Integer id;
-
+	@Size(min = 2, message = "size must be greater then 2")
 	@Column(name = "Name")
-	private String name;
+	private String name = "";
 
 	@Column(name = "Surname")
-	private String surname;
+	private String surname = "";
 
 	@Column(name = "Age")
-	private Integer age;
+	private Integer age = 0;
 
 	@Column(name = "Email")
-	private String email;
+	private String email = "";
 
 	@Column(name = "Login")
-	private String login;
+	private String login = "";
 
 	@Column(name = "Passoword")
-	private String password;
+	private String password = "";
 
 	public Integer getId() {
 		return id;

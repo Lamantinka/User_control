@@ -44,10 +44,44 @@ public class JpaService {
 
 	public Integer deletePersonById(Integer id) {
 
-		return accesRepo.deleteByyId(id);
+		return accesRepo.deletePersonById(id);
 	}
 
 	public Iterable<Person> getAll() {
 		return accesRepo.findAll();
+	}
+
+	public Iterable<Person> selectAndGroupById() {
+
+		return accesRepo.selectAndGroupById();
+	}
+
+	public String getNameById(Integer id) {
+		return accesRepo.getNameById(id);
+	}
+
+	public String getSurnameById(Integer id) {
+		return accesRepo.getSurnameById(id);
+	}
+
+	public String getEmailById(Integer id) {
+		return accesRepo.getEmailById(id);
+	}
+
+	public String getAgeById(Integer id) {
+		return accesRepo.getAgeById(id);
+	}
+
+	public String getLoginById(Integer id) {
+		return accesRepo.getLoginById(id);
+	}
+
+	public String getPasswordById(Integer id) {
+		return accesRepo.getPasswordById(id);
+	}
+
+	public void updatePerson(Person p) {
+		accesRepo.updateById(p.getId(), p.getName(), p.getSurname(), p.getAge(), p.getEmail(), p.getLogin(), p.getPassword());
+
 	}
 }

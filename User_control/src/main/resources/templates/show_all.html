@@ -3,17 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#id_update").keyup(function(){
+    	
+    	$("#hide").show();
+    	
+    	if( $("#id_update").val() =="") $("#hide").hide();
+    	else{
+    	$.ajax({
+    		url: "http://localhost:8080/rest/getNameById/"+$("#id_update").val(),
+    		success: function(result){
+            $("#label_name").val(result);
+        }});
+    	$.ajax({
+    		url: "http://localhost:8080/rest/getSurnameById/"+$("#id_update").val(),
+    		success: function(result){
+            $("#label_surname").val(result);
+        }});
+    	$.ajax({
+    		url: "http://localhost:8080/rest/getEmailById/"+$("#id_update").val(),
+    		success: function(result){
+            $("#label_email").val(result);
+        }});
+    	$.ajax({
+    		url: "http://localhost:8080/rest/getAgeById/"+$("#id_update").val(),
+    		success: function(result){
+            $("#label_age").val(result);
+        }});
+    	$.ajax({
+    		url: "http://localhost:8080/rest/getLoginById/"+$("#id_update").val(),
+    		success: function(result){
+            $("#label_login").val(result);
+        }});
+    	$.ajax({
+    		url: "http://localhost:8080/rest/getPasswordById/"+$("#id_update").val(),
+    		success: function(result){
+            $("#label_password").val(result);
+        }});
+    	
+    	}//else
+    	
+   
+    });
+});
+</script>
 </head>
+
 <body>
-<body>
+
+ Add person(field not required):
+<form action="#" th:action="@{/web/addNewPerson}" th:object="${new_person}" method="post">
+Name: <input type="text" th:field="*{name}"/><label th:if="${#fields.hasErrors('name')}" th:text="#{error.person.name}"></label><br>
+Surname: <input type="text" th:field="*{surname}"/><br>
+Email: <input type="text" th:field="*{email}"/><br>
+Age: <input type="text" th:field="*{age}"/><br>
+Login: <input type="text" th:field="*{login}"/><br>
+Password <input type="password" th:field="*{password}"/><br>
+
+<input type = "submit" value="Add"/>
+</form>
+<br>
+<br>
+<br>
+<form action="#" th:action="@{/web/updateExistingPerson}" th:object="${update_person}" method="post">
+Input id for Update person: <input type ="number" id ="id_update" th:field="*{id}"> 
+<label th:if="${#fields.hasErrors('name')}" th:text="#{error.person.name}"></label>
+<div id = "hide" style="display: none">
+Name: <input type = "text" id="label_name" th:field="*{name}"/><br>
+Surname:  <input type = "text" id="label_surname" th:field="*{surname}"><br>
+Email:  <input type = "text"  id="label_email" th:field="*{email}"><br>
+Age:  <input type = "text"  id="label_age" th:field="*{age}"><br>
+Login: <input type = "text"  id="label_login" th:field="*{login}"><br>
+Password  <input type = "text"  id="label_password" th:field="*{password}"><br>
+<input type = "submit"/>
+</div>
+</form>
+<br>
+<br>
+<form action="#" th:action="@{/web/deletePerson}"  method="post">
+Input id for <b>Delete </b>person: <input type ="number" name ="id_delete" /> 
+</form>
+<br>
+<br>
 <table>
 <tbody>
     <tr th:each="person: ${persons}">
     <td th:text = ${person.id}/>
     <td th:text = ${person.name}/>
+    <td th:text = ${person.surname}/>
+    <td th:text = ${person.age}/>
+    <td th:text = ${person.login}/>
+    <td th:text = ${person.password}/>
+    <td th:text = ${person.email}/>
 	<tr/>
 </tbody>
 </table>
-</body>
+
 </body>
 </html>
