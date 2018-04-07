@@ -14,7 +14,7 @@ public class UserControlApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserControlApplication.class, args);
-		System.out.println(32111117);
+		System.out.println(1);
 	}
 
 	@Override
