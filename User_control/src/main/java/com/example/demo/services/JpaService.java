@@ -64,8 +64,8 @@ public class JpaService {
 		return accesRepo.getSurnameById(id);
 	}
 
-	public String getEmailById(Integer id) {
-		return accesRepo.getEmailById(id);
+	public String getRoleById(Integer id) {
+		return accesRepo.getRoleById(id);
 	}
 
 	public String getAgeById(Integer id) {
@@ -81,7 +81,7 @@ public class JpaService {
 	}
 
 	public void updatePerson(Person p) {
-		accesRepo.updateById(p.getId(), p.getName(), p.getSurname(), p.getAge(), p.getEmail(), p.getLogin(), p.getPassword());
+		accesRepo.updateById(p.getId(), p.getName(), p.getSurname(), p.getAge(), p.getRole(), p.getLogin(), p.getPassword());
 
 	}
 }

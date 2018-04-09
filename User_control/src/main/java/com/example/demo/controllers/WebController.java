@@ -1,11 +1,21 @@
 package com.example.demo.controllers;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +28,23 @@ import com.example.demo.services.JpaService;
 @Controller
 @RequestMapping("/web")
 public class WebController {
+	public static final Logger logger = LoggerFactory.getLogger(WebController.class);
+
 	@Autowired
 	private JpaService service;
 
-	@RequestMapping("/allPersons")
-	public ModelAndView allPersons() {
+	@GetMapping("/allPersons")
+	public ModelAndView allPersons(HttpSession session) {
+		SecurityContextImpl s = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Collection<? extends GrantedAuthority> authorities = s.getAuthentication().getAuthorities();
+		List<String> l = new LinkedList<String>();
+		for (GrantedAuthority grantedAuthority : authorities) {
+			l.add(grantedAuthority.getAuthority());
+
+		}
+		if (!l.contains("ROLE_ADMIN"))
+			return new ModelAndView("not_allowed");
+
 		ModelAndView m = new ModelAndView("show_all");
 		Iterable<Person> all = service.selectAndGroupById();
 		m.addObject("persons", all);
@@ -61,6 +83,11 @@ public class WebController {
 		service.updatePerson(p);
 
 		return "redirect:/web/allPersons";
+	}
+
+	@GetMapping(value = "/login")
+	public String LoginPage() {
+		return "login";
 	}
 
 	// Post-redirect-get

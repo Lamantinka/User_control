@@ -52,9 +52,9 @@ public class RestController {
 		return service.getSurnameById(id);
 	}
 
-	@GetMapping("/getEmailById/{id}")
-	public String getEmailById(@PathVariable("id") Integer id) {
-		return service.getEmailById(id);
+	@GetMapping("/getRoleById/{id}")
+	public String getRoleById(@PathVariable("id") Integer id) {
+		return service.getRoleById(id);
 	}
 
 	@GetMapping("/getLoginById/{id}")

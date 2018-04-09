@@ -23,9 +23,9 @@ $(document).ready(function(){
             $("#label_surname").val(result);
         }});
     	$.ajax({
-    		url: "http://localhost:8080/rest/getEmailById/"+$("#id_update").val(),
+    		url: "http://localhost:8080/rest/getRoleById/"+$("#id_update").val(),
     		success: function(result){
-            $("#label_email").val(result);
+            $("#label_role").val(result);
         }});
     	$.ajax({
     		url: "http://localhost:8080/rest/getAgeById/"+$("#id_update").val(),
@@ -57,7 +57,7 @@ $(document).ready(function(){
 <form action="#" th:action="@{/web/addNewPerson}" th:object="${new_person}" method="post">
 Name: <input type="text" th:field="*{name}"/><label th:if="${#fields.hasErrors('name')}" th:text="#{error.person.name}"></label><br>
 Surname: <input type="text" th:field="*{surname}"/><br>
-Email: <input type="text" th:field="*{email}"/><br>
+Role: <input type="text" th:field="*{role}"/><br>
 Age: <input type="text" th:field="*{age}"/><br>
 Login: <input type="text" th:field="*{login}"/><br>
 Password <input type="password" th:field="*{password}"/><br>
@@ -73,7 +73,7 @@ Input id for Update person: <input type ="number" id ="id_update" th:field="*{id
 <div id = "hide" style="display: none">
 Name: <input type = "text" id="label_name" th:field="*{name}"/><br>
 Surname:  <input type = "text" id="label_surname" th:field="*{surname}"><br>
-Email:  <input type = "text"  id="label_email" th:field="*{email}"><br>
+Role:  <input type = "text"  id="label_role" th:field="*{role}"><br>
 Age:  <input type = "text"  id="label_age" th:field="*{age}"><br>
 Login: <input type = "text"  id="label_login" th:field="*{login}"><br>
 Password  <input type = "text"  id="label_password" th:field="*{password}"><br>
@@ -96,10 +96,13 @@ Input id for <b>Delete </b>person: <input type ="number" name ="id_delete" />
     <td th:text = ${person.age}/>
     <td th:text = ${person.login}/>
     <td th:text = ${person.password}/>
-    <td th:text = ${person.email}/>
+    <td th:text = ${person.role}/>
 	<tr/>
 </tbody>
 </table>
-
+<br>
+<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
 </body>
 </html>

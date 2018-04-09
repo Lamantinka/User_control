@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.core.annotation.Order;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -20,18 +22,19 @@ public class Person {
 	private String name = "";
 
 	@Column(name = "Surname")
+	@Order(2)
 	private String surname = "";
 
 	@Column(name = "Age")
 	private Integer age = 0;
 
-	@Column(name = "Email")
-	private String email = "";
+	@Column(name = "Role")
+	private String role = "";
 
-	@Column(name = "Login")
+	@Column(name = "Login", unique = true)
 	private String login = "";
 
-	@Column(name = "Passoword")
+	@Column(name = "Password")
 	private String password = "";
 
 	public Integer getId() {
@@ -43,6 +46,7 @@ public class Person {
 	}
 
 	public String getName() {
+
 		return name;
 	}
 
@@ -66,15 +70,16 @@ public class Person {
 		this.age = age;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getRole() {
+		return role;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getLogin() {
+		// System.out.println("getter log " + login);
 		return login;
 	}
 
@@ -83,6 +88,8 @@ public class Person {
 	}
 
 	public String getPassword() {
+		// System.out.println("getter pass " + password);
+
 		return password;
 	}
 
@@ -92,7 +99,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", surname=" + surname + ", age=" + age + ", email=" + email + ", login=" + login + ", password=" + password + "]";
+		return "Person [id=" + id + ", name=" + name + ", surname=" + surname + ", age=" + age + ", role=" + role + ", login=" + login + ", password=" + password + "]";
 	}
 
 }
